@@ -26,12 +26,16 @@ package com.example.qiyue.imageloader.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.annotation.DrawableRes;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.SizeReadyCallback;
 import com.example.qiyue.imageloader.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -63,6 +67,34 @@ public class GlideUtils {
     public static void displayRound(ImageView view,String url,int round){
         RequestManager requestManager = Glide.with(view.getContext());
         requestManager.load(url).transform(new GlideRoundTransform(view.getContext(), round)).into(view);
+    }
+
+    /**
+     * 无站位图，centerCrop策略加载
+     * @param view
+     * @param url
+     */
+    public static void displayCenterCrop(ImageView view,String url){
+        Glide.with(view.getContext())
+                .load(url)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .crossFade()
+                .centerCrop()
+                .into(view);
+    }
+
+    /**
+     * 无站位图，fitCenter策略
+     * @param view
+     * @param url
+     */
+    public static void displayFitCenter(ImageView view,String url){
+        Glide.with(view.getContext())
+                .load(url)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .crossFade()
+                .fitCenter()
+                .into(view);
     }
     /**
      * glide加载图片
@@ -147,6 +179,13 @@ public class GlideUtils {
         }
 
     }
+
+    public void displayResolveBug(final ImageView imageView, String url){
+
+
+    }
+
+
 
 
 
